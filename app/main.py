@@ -5,3 +5,11 @@ def addition(a,b):
 # subtraction function
 def subtraction(a,b):
     return a - b
+
+# multiplication function
+def multiplication(a,b):
+    return a * b
+
+# division function
+def division(a,b):
+    return a / b
