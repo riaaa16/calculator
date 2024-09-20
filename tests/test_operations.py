@@ -1,25 +1,43 @@
-'''My Calculator Test'''
+''' My Calculator Test'''
 import pytest
-from app.operations import addition, subtraction, multiplication, division
+from app.operations import addition, division, multiplication, subtraction
 
-def test_addition():
+
+# Parameterized test for addition
+@pytest.mark.parametrize("a, b, expected", [
+    (1, 1, 2), (2, 3, 5), (-1, -1, -2), (0, 0, 0)
+])
+def test_addition(a, b, expected):
     '''Addition function'''
-    assert addition(1,1) == 2
+    assert addition(a, b) == expected
 
-def test_subtraction():
+# Parameterized test for subtraction
+@pytest.mark.parametrize("a, b, expected", [
+    (1, 1, 0), (5, 3, 2), (-1, -1, 0), (0, 5, -5)
+])
+def test_subtraction(a, b, expected):
     '''Subtraction function'''
-    assert subtraction(1,1) == 0
+    assert subtraction(a, b) == expected
 
-def test_multiplication():
+# Parameterized test for multiplication
+@pytest.mark.parametrize("a, b, expected", [
+    (2, 2, 4), (3, 5, 15), (0, 5, 0), (-1, 1, -1)
+])
+def test_multiplication(a, b, expected):
     '''Multiplication function'''
-    assert multiplication(2,2) == 4
+    assert multiplication(a, b) == expected
 
-def test_division():
+# Parameterized test for division
+@pytest.mark.parametrize("a, b, expected", [
+    (2, 2, 1), (10, 5, 2), (9, 3, 3)
+])
+def test_division(a, b, expected):
     '''Division function'''
-    assert division(2,2) == 1
+    assert division(a, b) == expected
 
+# Test for division by zero exception
 def test_division_by_zero_exception():
-    '''Division function testing that dividing by 0 throws an exception'''
+    '''Division function testing that I get the exception divide by zero'''
     with pytest.raises(ZeroDivisionError):
-        division(10,0)
+        division(10, 0)
         
