@@ -26,6 +26,7 @@ class Calculation(ABC):
     def compute(self) -> Number:
         '''abstract method defining generic structure'''
         # No implementation here, subclasses will provide it.
+        pass
 
 # It inherits from the Calculation class and must implement the abstract method 'compute'.
 class Addition(Calculation):
