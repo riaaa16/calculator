@@ -1,6 +1,5 @@
 '''importing abstract methods, unions, operations and number type alias'''
 from abc import ABC, abstractmethod
-from typing import Union
 from app.operations import addition, subtraction, multiplication, division, Number
 
 class Calculation(ABC):
