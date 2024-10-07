@@ -13,11 +13,12 @@ from app.calculation import Addition, Subtraction, Multiplication, Division
     (-0.5,1.5,1.0),     # adding one -float, one +float
 ])
 
-def test_addition_compute(a, b, expected):
-    '''testing class and abstract methods for addition'''
-    addition = Addition.create(a,b)
-    # f means a formatted string literal
-    assert addition.compute() == expected, f"Expected {expected}, but got {addition.compute()}"
+def test_addition(a, b, expected):
+    '''Test for addition operation'''
+    operation = Addition.create(a, b)
+    assert operation.compute() == expected
+    assert str(operation) == f"Addition: {a} + {b} = {expected}"
+    assert repr(operation) == f"Addition(a={a}, b={b}, result={expected})"
 
 # parameters to test subtraction
 @pytest.mark.parametrize("a, b, expected", [
@@ -30,11 +31,12 @@ def test_addition_compute(a, b, expected):
     (-0.5,1.5,-2.0),    # subtracting one -float, one +float
 ])
 
-def test_subtraction_compute(a, b, expected):
-    '''testing class and abstract methods for subtraction'''
-    subtraction = Subtraction.create(a,b)
-    # f means a formatted string literal
-    assert subtraction.compute() == expected, f"Expected {expected}, but got {subtraction.compute()}"
+def test_subtraction(a, b, expected):
+    '''Test for subtraction operation'''
+    operation = Subtraction.create(a, b)
+    assert operation.compute() == expected
+    assert str(operation) == f"Subtraction: {a} - {b} = {expected}"
+    assert repr(operation) == f"Subtraction(a={a}, b={b}, result={expected})"
 
 # parameters to test multiplication
 @pytest.mark.parametrize("a, b, expected", [
@@ -47,11 +49,12 @@ def test_subtraction_compute(a, b, expected):
     (-0.5, 2.0, -1.0),  # multiplying one -float, one +float
 ])
 
-def test_multiplication_compute(a, b, expected):
-    '''testing class and abstract methods for multiplication'''
-    multiplication = Multiplication.create(a,b)
-    # f means a formatted string literal
-    assert multiplication.compute() == expected, f"Expected {expected}, but got {multiplication.compute()}"
+def test_multiplication(a, b, expected):
+    '''Test for multiplication operation'''
+    operation = Multiplication.create(a, b)
+    assert operation.compute() == expected
+    assert str(operation) == f"Multiplication: {a} * {b} = {expected}"
+    assert repr(operation) == f"Multiplication(a={a}, b={b}, result={expected})"
 
 # parameters to test division
 @pytest.mark.parametrize("a, b, expected", [
@@ -60,15 +63,16 @@ def test_multiplication_compute(a, b, expected):
     (-1,-1, 1),         # dividing negatives
     (20000,200,100),    # dividing large positives
     (-100,10,-10),      # dividing one negative, one positive
-    (0.5, 0.5, 1.0),    # dividing floats
-    (-0.5, 0.5, -1.0),  # dividing one -float, one +float
+    (0.5, 0.5, 1),    # dividing floats
+    (-0.5, 0.5, -1),  # dividing one -float, one +float
 ])
 
-def test_division_compute(a, b, expected):
-    '''testing class and abstract methods for division'''
-    division = Division.create(a,b)
-    # f means a formatted string literal
-    assert division.compute() == expected, f"Expected {expected}, but got {division.compute()}"
+def test_division(a, b, expected):
+    '''Test for division operation'''
+    operation = Division.create(a, b)
+    assert operation.compute() == expected
+    assert str(operation) == f"Division: {a} / {b} = {expected}"
+    assert repr(operation) == f"Division(a={a}, b={b}, result={expected})"
 
 # parameters to test division by 0
 @pytest.mark.parametrize("a, b", [
@@ -76,12 +80,11 @@ def test_division_compute(a, b, expected):
     (100,0),          # divide by 0 with larger numbers
 ])
 
-def test_division_by_zero(a, b):
-    '''testing division by zero'''
-    division = Division.create(a,b)
-    # with tells pytest to expect ZeroDivisionError
+def test_division_by_zero_exception(a,b):
+    '''Test for division by zero exception'''
+    operation = Division.create(a,b)
     with pytest.raises(ZeroDivisionError):
-        division.compute()
+        operation.compute()
 
 # parameters to test type errors for all operations
 @pytest.mark.parametrize("a, b, operation", [
@@ -94,4 +97,4 @@ def test_division_by_zero(a, b):
 def test_invalid_types(a, b, operation):
     '''pytest is expecting TypeError'''
     with pytest.raises(TypeError):
-        calculation = operation.create(a, b)
+        operation.create(a, b)
